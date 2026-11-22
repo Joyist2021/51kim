@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>51kim 本地镜像 · 管理后台</title>
+  <link rel="stylesheet" href="/assets/css/admin.css">
+</head>
+<body>
+  <div id="login-view" class="login-view hidden">
+    <form id="login-form" class="login-card">
+      <div class="brand">51KIM</div>
+      <h1>本地镜像管理后台</h1>
+      <p class="sub">管理站点数据库与注册用户，支持修改管理员密码</p>
+      <label>管理员账号</label>
+      <input id="admin-user" name="username" autocomplete="username" value="admin" required>
+      <label>密码</label>
+      <input id="admin-pass" name="password" type="password" autocomplete="current-password" required>
+      <button class="primary" type="submit">登录</button>
+      <div id="login-msg" class="msg"></div>
+      <p class="hint">默认账号 admin / 123456（详见 README）</p>
+    </form>
+  </div>
+
+  <div id="app-view" class="app hidden">
+    <header class="topbar">
+      <div class="title">
+        <span class="dot"></span>
+        <strong>51kim 本地镜像</strong>
+        <span class="sep">/</span>
+        <span id="page-title">分类标签</span>
+      </div>
+      <div class="top-actions">
+        <a class="btn ghost" href="/" target="_blank">打开主页</a>
+        <span id="who" class="who"></span>
+        <button id="logout-btn" class="btn ghost">退出</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="side-title">数据管理</div>
+        <button class="nav active" data-kind="categories">分类标签 <span id="nav-categories" class="badge">0</span></button>
+        <button class="nav" data-kind="groups">站点分组 <span id="nav-groups" class="badge">0</span></button>
+        <button class="nav" data-kind="sites">站点条目 <span id="nav-sites" class="badge">0</span></button>
+        <button class="nav" data-kind="icons">顶部图标 <span id="nav-icons" class="badge">0</span></button>
+        <button class="nav" data-kind="users">注册用户 <span id="nav-users" class="badge">0</span></button>
+        <button id="admin-pw-btn" class="nav password-nav">修改管理员密码</button>
+        <div class="side-note">
+          站点数据写入 <code>site_data.db</code>，用户数据写入 <code>users.db</code>；刷新主页即可生效。
+        </div>
+      </aside>
+
+      <main class="content">
+        <section class="stat-grid" id="stat-grid"></section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 id="table-title">分类标签</h2>
+              <p id="table-desc">管理首页的分类切换标签</p>
+            </div>
+            <div class="tools">
+              <input id="search" type="search" placeholder="搜索表格内容…">
+              <button id="add-btn" class="btn primary">新增条目</button>
+              <button id="refresh-btn" class="btn">刷新</button>
+            </div>
+          </div>
+          <div id="notice" class="notice hidden"></div>
+          <div class="table-wrap">
+            <table>
+              <thead id="table-head"></thead>
+              <tbody id="table-body"></tbody>
+            </table>
+          </div>
+          <div id="table-foot" class="table-foot"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3 id="modal-title">编辑</h3>
+        <button id="modal-close" class="icon-btn" aria-label="关闭">×</button>
+      </div>
+      <form id="edit-form">
+        <div id="modal-msg" class="msg"></div>
+        <div id="form-fields" class="form-grid"></div>
+        <div class="modal-foot">
+          <button type="button" id="cancel-btn" class="btn">取消</button>
+          <button type="submit" id="save-btn" class="btn primary">保存</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/assets/js/admin.js"></script>
+</body>
+</html>
